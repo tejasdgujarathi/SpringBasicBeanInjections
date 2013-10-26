@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:tx="http://www.springframework.org/schema/tx"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+ http://www.sprin gframework.org/schema/util http://www.sprin gframework.org/schema/util/sprin g-util-2.0.xsd
+ http://www.sprin gframework.org/schema/tx http://www.sprin gframework.org/schema/tx/sprin g-tx-3.0.xsd ">
+
+<bean id="car" class="com.spring.carwheelexample.model.Car" autowire="byType">
+    <!-- Constructor Injection -->
+    <constructor-arg value="Ferari"/>
+    
+    <!-- Setter Injection -->
+    <property name="purchasedDate" value="23/12/2011"/>
+    
+    <property name="wheel" ref="wheel">
+    </property>
+    
+    <property name="carDrivers">
+        <set>
+            <ref bean="Ramu"/>
+            <ref bean="Shamu"/>
+        </set>
+    </property>
+    
+    <property name="mirrors">
+        <list>
+            <ref bean="front"/>
+            <ref bean="rear"/>
+        </list>
+    </property>
+    
+    <property name="driverContacts">
+        <map>
+            <entry key="12345" value-ref="Ramu"/>
+        </map><!-- Similar can be done for key-ref or key,value -->
+    </property>
+</bean>
+
+<bean name="Ramu" class="com.spring.carwheelexample.model.Driver">
+    <property name="name" value="Ramu"/>
+</bean>
+
+<bean name="Shamu" class="com.spring.carwheelexample.model.Driver">
+    <property name="name" value="Shamu"/>
+</bean>
+
+<bean id="front" class="com.spring.carwheelexample.model.Mirror">
+    <property name="type" value="front"/>
+</bean>
+
+<bean id="rear" class="com.spring.carwheelexample.model.Mirror">
+    <property name="type" value="rear"/>
+</bean>
+
+<bean id="wheel" class="com.spring.carwheelexample.model.BridgeStone">
+</bean>
+
+<bean id="CarType" class="com.spring.carwheelexample.model.CarType">
+	<property name="type" value="SUV"/>
+</bean>
+</beans>
